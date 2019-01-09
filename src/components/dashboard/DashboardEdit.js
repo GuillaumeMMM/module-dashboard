@@ -11,7 +11,7 @@ class DashboardEdit extends Component {
     const maxRows = 10;
 
     return (
-        <GridLayout className="layout" layout={layout} cols={12} width={window.innerWidth * 0.94} rowHeight={((window.innerHeight - 10) / maxRows) - 10} maxRows={maxRows} preventCollision={true}>
+        <GridLayout className="layout" layout={layout} cols={12} width={window.innerWidth} rowHeight={((window.innerHeight * 0.9 - 10) / maxRows) - 10} maxRows={maxRows} preventCollision={true}>
             {this.createLayout(layout)}
         </GridLayout>
     )

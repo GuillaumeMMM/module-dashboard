@@ -1,9 +1,22 @@
+//  Day
 $primary: #2c78ff;
 $secondary: #52ACFF;
 $tertiary: #FF5664;
 $gradient: #32a9ff;
 
-
-
 $text-primary: #f4f4f4;
 $text-secondary: rgb(172, 171, 171);
+
+
+//  Night
+$dark-primary: rgba(31, 41, 51, 1);
+$dark-secondary: rgba(35, 45, 56, 1);
+$dark-tertiary: rgba(37, 52, 67, 1);
+$dark-gradient: rgba(38, 47, 56, 1);
+
+$text-dark-primary: rgba(255, 255, 255, 1);
+$text-dark-secondary: rgba(81, 94, 117, 1);
+$text-dark-selected: rgba(44, 120, 255, 1);
+
+//  Fonts
+$font-primary: 'Open Sans', sans-serif;
