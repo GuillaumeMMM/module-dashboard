@@ -5,7 +5,7 @@ import 'react-resizable/css/styles.css';
 
 class DashboardLive extends Component {
 
-    maxRows = 10;
+    maxRows = 5;
     rowHeight = ((window.innerHeight * 0.9 - 10) / this.maxRows) - 10;
     maxCols = 8;
 

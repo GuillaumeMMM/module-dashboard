@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import GridLayout from 'react-grid-layout';
 import 'react-grid-layout/css/styles.css';
 import 'react-resizable/css/styles.css';
+import * as uuid from 'uuid';
+import Block from '../elements/Block';
 
 class DashboardEdit extends Component {
 
@@ -26,7 +28,7 @@ class DashboardEdit extends Component {
     createLayout(layout) {
         let layoutElements = [];
         for (let i = 0; i < layout.length; i++) {
-            layoutElements.push(<div key={layout[i].i} className="dashboard-block" data-grid={layout[i]}>{layout[i].i}</div>);
+            layoutElements.push(<div key={layout[i].i} className="dashboard-block" data-grid={layout[i]}><Block id={layout[i].i}></Block></div>);
         }
         return layoutElements;
     }
@@ -39,8 +41,10 @@ class DashboardEdit extends Component {
     addBlock = () => {
         const avaliableSquare = this.avaliableSquare(this.state.layout, this.maxRows, this.maxCols);
         const newLayout = this.state.layout;
-        newLayout.push({i: 'e', x: avaliableSquare.x, y: avaliableSquare.y, h: 2, w: 2});
-        this.setState({layout: newLayout});
+        if (avaliableSquare.x !== -1 && avaliableSquare.y !== -1) {
+            newLayout.push({i: uuid(), x: avaliableSquare.x, y: avaliableSquare.y, h: 1, w: 1});
+            this.setState({layout: newLayout});
+        }
     }
 
     avaliableSquare(layoutTmp, maxRowsTmp, maxColsTmp) {
