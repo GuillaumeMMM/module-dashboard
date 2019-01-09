@@ -1,0 +1,98 @@
+@import './variables';
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background-color: #f4F4F4;
+
+    .App {
+        display: flex;
+
+        .sidebar {
+            width: 6vw;
+            height: 100vh;
+            background-color: white;
+            position: relative;
+            display: flex;
+            align-items: center;
+
+            .sidebar-icon-container {                
+                width: 60%;
+                margin: 20%;
+                position: absolute;
+                top: 0;
+                left: 0;
+
+                .sidebar-icon {
+                    width: 100%;
+                    height: 100%;
+                    border-radius: 100%;
+                    -webkit-box-shadow: -1px 0px 40px -4px rgba(0,0,0,0.3);
+                    -moz-box-shadow: -1px 0px 40px -4px rgba(0,0,0,0.3);
+                    box-shadow: -1px 0px 40px -4px rgba(0,0,0,0.3);
+                    cursor: pointer;
+                }
+                .sidebar-icon:hover {
+                    -webkit-box-shadow: -1px 0px 40px -4px rgba(0,0,0,0.5);
+                    -moz-box-shadow: -1px 0px 40px -4px rgba(0,0,0,0.5);
+                    box-shadow: -1px 0px 40px -4px rgba(0,0,0,0.5);
+                }
+            }
+
+            .vertical-navbar-container {
+                height: 40vh;
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+
+                .nav-element {
+                    width: 100%;
+                    height: 6vw;
+                    display: flex;
+                    // justify-content: center;
+                    align-items: center;
+
+                    a {
+                        text-decoration: none;
+                        color: black;
+                    }
+                }
+            }
+        }
+
+        .dashboard {
+            width: 94vw;
+            height: 100vh;
+            background-color: $primary;
+
+            .dashboard-block {
+                background-color: $secondary;
+                background-image: linear-gradient(135deg, $secondary 25%, $gradient 100%);
+                color: $text-primary;
+                -webkit-box-shadow: -1px 0px 40px -4px rgba(0,0,0,0.1);
+                -moz-box-shadow: -1px 0px 40px -4px rgba(0,0,0,0.1);
+                box-shadow: -1px 0px 40px -4px rgba(0,0,0,0.1);
+            }
+
+            .dashboard-block:hover {
+                -webkit-box-shadow: -1px 0px 40px -4px rgba(0,0,0,0.2);
+                -moz-box-shadow: -1px 0px 40px -4px rgba(0,0,0,0.2);
+                box-shadow: -1px 0px 40px -4px rgba(0,0,0,0.2);
+            }
+
+            .react-grid-item.react-grid-placeholder {
+                background: $secondary;
+                opacity: 0.4;
+            }
+
+            .react-grid-item > .react-resizable-handle::after {
+                border-right: 2px solid $text-primary;
+                border-bottom: 2px solid $text-primary;
+            }
+        }
+    }
+}
