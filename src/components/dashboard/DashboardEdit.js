@@ -5,25 +5,74 @@ import 'react-resizable/css/styles.css';
 
 class DashboardEdit extends Component {
 
-  render() {
-    const { layout } = this.props;
+    maxRows = 5;
+    rowHeight = ((window.innerHeight * 0.9 - 10) / this.maxRows) - 10;
+    maxCols = 8;
 
-    const maxRows = 10;
+    state = {layout: this.props.layout};
 
-    return (
-        <GridLayout className="layout" layout={layout} cols={12} width={window.innerWidth} rowHeight={((window.innerHeight * 0.9 - 10) / maxRows) - 10} maxRows={maxRows} preventCollision={true}>
-            {this.createLayout(layout)}
-        </GridLayout>
-    )
-  }
+    render() {
 
-  createLayout(layout) {
-    let layoutElements = [];
-    for (let i = 0; i < layout.length; i++) {
-        layoutElements.push(<div key={layout[i].i} className="dashboard-block">{layout[i].i}</div>);
+        return (
+            <React.Fragment>
+                <GridLayout className="layout" layout={this.state.layout} data-grid={this.state.layout} cols={this.maxCols} width={window.innerWidth} rowHeight={this.rowHeight} maxRows={this.maxRows} preventCollision={true} verticalCompact={false} onResizeStop={this.resizedBlock.bind(this)}>
+                    {this.createLayout(this.state.layout)}
+                </GridLayout>
+                <button onClick={this.addBlock.bind(this)}>Add</button>
+            </React.Fragment>
+        )
     }
-    return layoutElements;
-}
+
+    createLayout(layout) {
+        let layoutElements = [];
+        for (let i = 0; i < layout.length; i++) {
+            layoutElements.push(<div key={layout[i].i} className="dashboard-block" data-grid={layout[i]}>{layout[i].i}</div>);
+        }
+        return layoutElements;
+    }
+
+    resizedBlock(newLayout) {
+        //  Update layout
+        this.setState({layout: newLayout});
+    }
+
+    addBlock = () => {
+        const avaliableSquare = this.avaliableSquare(this.state.layout, this.maxRows, this.maxCols);
+        const newLayout = this.state.layout;
+        newLayout.push({i: 'e', x: avaliableSquare.x, y: avaliableSquare.y, h: 2, w: 2});
+        this.setState({layout: newLayout});
+    }
+
+    avaliableSquare(layoutTmp, maxRowsTmp, maxColsTmp) {
+        //  Construct matrix
+        const layoutMatrix = [];
+        for (let i = 0; i < maxRowsTmp; i++) {
+            const row = [];
+            for (let j = 0; j < maxColsTmp; j++) {
+                row.push(0);
+            }
+            layoutMatrix.push(row);
+        }
+
+        //  Identify used squares
+        layoutTmp.forEach(layoutBlock => {
+            for (let i = layoutBlock.x; i < layoutBlock.x + layoutBlock.w; i++) {
+                for (let j = layoutBlock.y; j < layoutBlock.y + layoutBlock.h; j++) {
+                    layoutMatrix[j][i] = 1;
+                }
+            }
+        });
+
+        //  Find first Empty space
+        for (let i = 0; i < layoutMatrix.length; i++) {
+            for (let j = 0; j < layoutMatrix[i].length; j++) {
+                if (layoutMatrix[i][j] === 0) {
+                    return {x: j, y: i};
+                }
+            }
+        }
+        return {x: -1, y: -1};
+    }
 }
 
 export default DashboardEdit;

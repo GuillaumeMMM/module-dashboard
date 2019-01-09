@@ -47,7 +47,11 @@ body {
                 }
             }
 
-            .vertical-navbar-container {
+            .profile-name{
+                margin-left: 10vh;
+            }
+
+            .navbar-container {
                 height: 100%;
                 width: 20vw;
                 margin-left: auto;
@@ -64,6 +68,10 @@ body {
                     a {
                         text-decoration: none;
                         color: $text-dark-primary;
+                    }
+
+                    a.active {
+                        color: $text-dark-selected;
                     }
                 }
             }

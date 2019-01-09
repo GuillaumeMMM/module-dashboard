@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import icon from '../../assets/icon.png';
-import VerticalNavbar from '../elements/VerticalNavbar';
+import Navbar from '../elements/Navbar';
 
 class Sidebar extends Component {
   render() {
@@ -9,7 +9,10 @@ class Sidebar extends Component {
             <div className="sidebar-icon-container">
                 <img className="sidebar-icon" src={icon} alt="sidebar icon"></img>
             </div>
-            <VerticalNavbar></VerticalNavbar>
+            <div className="profile-name">
+                Guillaume Meigniez
+            </div>
+            <Navbar></Navbar>
         </div>
     )
   }

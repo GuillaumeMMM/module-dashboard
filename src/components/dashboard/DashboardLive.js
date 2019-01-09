@@ -5,16 +5,19 @@ import 'react-resizable/css/styles.css';
 
 class DashboardLive extends Component {
 
+    maxRows = 10;
+    rowHeight = ((window.innerHeight * 0.9 - 10) / this.maxRows) - 10;
+    maxCols = 8;
+
     render() {
         const { layout } = this.props;
         if (layout.length > 0) {
             layout.map(layoutBlock => layoutBlock.static = true);
         }
-        const maxRows = 10;
 
 
         return (
-            <GridLayout className="layout" layout={layout} cols={12} width={window.innerWidth} rowHeight={((window.innerHeight * 0.9 - 10) / maxRows) - 10} maxRows={maxRows} preventCollision={true}>
+            <GridLayout className="layout" layout={layout} cols={this.maxCols} width={window.innerWidth} rowHeight={this.rowHeight} maxRows={this.maxRows} preventCollision={true} verticalCompact={false}>
                 {this.createLayout(layout)}
             </GridLayout>
         )

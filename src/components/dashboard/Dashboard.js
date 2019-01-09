@@ -11,7 +11,7 @@ class Dashboard extends Component {
             {i: 'a', x: 0, y: 0, w: 1, h: 2},
             {i: 'b', x: 1, y: 0, w: 3, h: 1},
             {i: 'c', x: 4, y: 0, w: 1, h: 2},
-            {i: 'd', x: 5, y: 0, w: 1, h: 10}
+            {i: 'd', x: 5, y: 0, w: 1, h: 5},
         ]
     };
 
