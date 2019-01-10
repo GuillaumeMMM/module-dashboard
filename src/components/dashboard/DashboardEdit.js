@@ -14,13 +14,16 @@ class DashboardEdit extends Component {
     state = {layout: this.props.layout};
 
     render() {
+        if (this.state.layout.length > 0) {
+            this.state.layout.map(layoutBlock => layoutBlock.static = false);
+        }
 
         return (
             <React.Fragment>
-                <GridLayout className="layout" layout={this.state.layout} data-grid={this.state.layout} cols={this.maxCols} width={window.innerWidth} rowHeight={this.rowHeight} maxRows={this.maxRows} preventCollision={true} verticalCompact={false} onResizeStop={this.resizedBlock.bind(this)}>
+                <GridLayout className="layout" layout={this.state.layout} data-grid={this.state.layout} cols={this.maxCols} width={window.innerWidth} rowHeight={this.rowHeight} maxRows={this.maxRows} preventCollision={true} compactType={null} onResizeStop={this.resizedBlock.bind(this)} onLayoutChange={this.layoutChange.bind(this)}>
                     {this.createLayout(this.state.layout)}
                 </GridLayout>
-                <button onClick={this.addBlock.bind(this)}>Add</button>
+                <button className="add-button" onClick={this.addBlock.bind(this)}>Add</button>
             </React.Fragment>
         )
     }
@@ -28,9 +31,20 @@ class DashboardEdit extends Component {
     createLayout(layout) {
         let layoutElements = [];
         for (let i = 0; i < layout.length; i++) {
-            layoutElements.push(<div key={layout[i].i} className="dashboard-block" data-grid={layout[i]}><Block id={layout[i].i}></Block></div>);
+            layoutElements.push(<div key={layout[i].i} className="dashboard-block" data-grid={layout[i]}><Block id={layout[i].i} deleteBlock={this.deleteBlock.bind(this)} mode="edit" widget={this.props.layout[i].widget}></Block></div>);
         }
         return layoutElements;
+    }
+
+    layoutChange(layout) {
+        this.props.updateLayout(layout);
+    }
+
+    deleteBlock(id) {
+        const newLayout = this.state.layout.filter(layoutBlock => {
+            return layoutBlock.i !== id;
+        });
+        this.setState({layout: newLayout});
     }
 
     resizedBlock(newLayout) {
@@ -40,9 +54,9 @@ class DashboardEdit extends Component {
 
     addBlock = () => {
         const avaliableSquare = this.avaliableSquare(this.state.layout, this.maxRows, this.maxCols);
-        const newLayout = this.state.layout;
+        const newLayout = this.props.layout;
         if (avaliableSquare.x !== -1 && avaliableSquare.y !== -1) {
-            newLayout.push({i: uuid(), x: avaliableSquare.x, y: avaliableSquare.y, h: 1, w: 1});
+            newLayout.push({i: uuid(), x: avaliableSquare.x, y: avaliableSquare.y, h: 1, w: 1, widget: {}});
             this.setState({layout: newLayout});
         }
     }
