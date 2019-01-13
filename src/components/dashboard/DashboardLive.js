@@ -10,6 +10,7 @@ class DashboardLive extends Component {
     maxRows = 5;
     rowHeight = ((window.innerHeight * 0.9 - 10) / this.maxRows) - 10;
     maxCols = 8;
+    colWidth = ((window.innerWidth - 10) / this.maxCols) - 10;
 
     render() {
         if (this.state.layout.length > 0) {
@@ -26,7 +27,7 @@ class DashboardLive extends Component {
     createLayout(layout) {
         let layoutElements = [];
         for (let i = 0; i < layout.length; i++) {
-            layoutElements.push(<div key={layout[i].i} className="dashboard-block"><Block id={layout[i].i} mode="live" widget={this.props.layout[i].widget}></Block></div>);
+            layoutElements.push(<div key={layout[i].i} className="dashboard-block"><Block id={layout[i].i} mode="live" widget={this.props.layout[i].widget} dimensions={{width: this.props.layout[i].w * (this.colWidth + 10) - 10, height: this.props.layout[i].h * (this.rowHeight + 10) - 10}}></Block></div>);
         }
         return layoutElements;
     }

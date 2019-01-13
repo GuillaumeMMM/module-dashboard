@@ -10,8 +10,9 @@ class DashboardEdit extends Component {
     maxRows = 5;
     rowHeight = ((window.innerHeight * 0.9 - 10) / this.maxRows) - 10;
     maxCols = 8;
+    colWidth = ((window.innerWidth - 10) / this.maxCols) - 10;
 
-    state = {layout: this.props.layout};
+    state = {layout: this.props.layout, updateBlocks: false};
 
     render() {
         if (this.state.layout.length > 0) {
@@ -31,13 +32,14 @@ class DashboardEdit extends Component {
     createLayout(layout) {
         let layoutElements = [];
         for (let i = 0; i < layout.length; i++) {
-            layoutElements.push(<div key={layout[i].i} className="dashboard-block" data-grid={layout[i]}><Block id={layout[i].i} deleteBlock={this.deleteBlock.bind(this)} mode="edit" widget={this.props.layout[i].widget}></Block></div>);
+            layoutElements.push(<div key={layout[i].i} className="dashboard-block" data-grid={layout[i]}><Block id={layout[i].i} deleteBlock={this.deleteBlock.bind(this)} mode="edit" widget={this.props.layout[i].widget} dimensions={{width: this.props.layout[i].w * (this.colWidth + 10) - 10, height: this.props.layout[i].h * (this.rowHeight + 10) - 10}}></Block></div>);
         }
         return layoutElements;
     }
 
     layoutChange(layout) {
         this.props.updateLayout(layout);
+        this.setState({updateBlocks: true});
     }
 
     deleteBlock(id) {
@@ -47,7 +49,7 @@ class DashboardEdit extends Component {
         this.setState({layout: newLayout});
     }
 
-    resizedBlock(newLayout) {
+    resizedBlock(newLayout, block) {
         //  Update layout
         this.setState({layout: newLayout});
     }
