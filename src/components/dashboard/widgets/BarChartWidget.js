@@ -51,7 +51,7 @@ class BarChartWidget extends Component {
             .attr("transform", `translate(0, ${this.relativeHeight(100) - this.relativeHeight(this.state.margin.bottom)})`)
             .call(d3.axisBottom(x));
 
-         //  Create yAxis from y scale
+        //  Create yAxis from y scale
         const yAxis = this.state.svg.append('g')
             .attr("transform", `translate(${this.relativeWidth(this.state.margin.left)}, 0)`)
             .call(d3.axisLeft(y));
@@ -166,7 +166,7 @@ class BarChartWidget extends Component {
         const relativeHeight = (value) => {
             return value * dimensions.height / 10;
         }
-        return { 
+        return {
             width: relativeWidth,
             height: relativeHeight,
         }

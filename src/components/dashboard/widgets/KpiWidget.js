@@ -30,7 +30,7 @@ class KpiWidget extends Component {
 
         const group = svg.append('g').attr('transform', 'translate(500, 500)');
 
-        this.setState({svg: svg, group: group}, () => {
+        this.setState({ svg: svg, group: group }, () => {
             this.appendCircleArcs();
             this.appendTexts();
         });
@@ -40,7 +40,7 @@ class KpiWidget extends Component {
         //  Ensure that the component is mounted and the state is set before updating the graph
         if (this.state.pathGood) {
             this.update(props.data[0]);
-        } 
+        }
     }
 
     appendCircleArcs() {
@@ -65,12 +65,12 @@ class KpiWidget extends Component {
             .attr('d', arcGood)
             .attr('fill', styles.primary);
 
-        this.setState({pathBack: pathBack, pathGood: pathGood});
+        this.setState({ pathBack: pathBack, pathGood: pathGood });
     }
 
     appendTexts() {
         const valueText = this.state.group.selectAll('.text-value').data(this.props.data)
-        .enter().append('text')
+            .enter().append('text')
             .attr('class', 'text-value')
             .attr('x', 0)
             .attr('y', 0)
@@ -83,17 +83,17 @@ class KpiWidget extends Component {
 
         const kpiNameText = this.state.group.selectAll('.text-name').data(this.props.data)
             .enter().append('text')
-                .attr('class', 'text-name')
-                .attr('x', 0)
-                .attr('y', 100)
-                .attr('font-size', 60)
-                .attr('font-family', 'sans-serif')
-                .style('text-anchor', 'middle')
-                .style('alignment-baseline', 'middle')
-                .attr('fill', styles.textDarkSecondary)
-                .text((d) => d.name);
+            .attr('class', 'text-name')
+            .attr('x', 0)
+            .attr('y', 100)
+            .attr('font-size', 60)
+            .attr('font-family', 'sans-serif')
+            .style('text-anchor', 'middle')
+            .style('alignment-baseline', 'middle')
+            .attr('fill', styles.textDarkSecondary)
+            .text((d) => d.name);
 
-        this.setState({valueText: valueText, kpiNameText: kpiNameText});
+        this.setState({ valueText: valueText, kpiNameText: kpiNameText });
     }
 
     update(newData) {
@@ -112,14 +112,14 @@ class KpiWidget extends Component {
             }
             this.state.pathGood.transition().duration(500).attrTween('d', arcTweenGood);
 
-            this.state.valueText.transition().duration(500).tween('text', function(d) {
+            this.state.valueText.transition().duration(500).tween('text', function (d) {
                 var i = d3.interpolate(previousValue, newData.value);
                 return (t) => {
-                  d3.select(this).text(Math.round(i(t)));
+                    d3.select(this).text(Math.round(i(t)));
                 };
-              });
+            });
         });
-        this.setState({lastValue: newData.value, lastOver: newData.over});
+        this.setState({ lastValue: newData.value, lastOver: newData.over });
     }
 
     componentDidUpdate() {
