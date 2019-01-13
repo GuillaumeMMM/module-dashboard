@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
 import KpiWidget from '../dashboard/widgets/KpiWidget';
 import BarChartWidget from '../dashboard/widgets/BarChartWidget';
+import CurveWidget from '../dashboard/widgets/CurveWidget';
 
 class Block extends Component {
   mode = '';
 
   render() {
-    console.log('render');
-
     const { id, widget } = this.props;
     this.mode = this.props.mode;
 
@@ -48,6 +47,8 @@ class Block extends Component {
         return <KpiWidget data={widget.data} id={this.props.id} dimensions={{width: contentWidth, height: contentHeight}}></KpiWidget>;
       case 'barchart':
         return <BarChartWidget data={widget.data} id={this.props.id} dimensions={{width: contentWidth, height: contentHeight}}></BarChartWidget>;
+      case 'curvechart':
+        return <CurveWidget data={widget.data} id={this.props.id} dimensions={{width: contentWidth, height: contentHeight}}></CurveWidget>;
       default: return null;
     }
   }

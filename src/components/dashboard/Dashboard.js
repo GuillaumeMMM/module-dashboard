@@ -9,10 +9,10 @@ class Dashboard extends Component {
         super();
         this.state = {
             layout: [
-                {i: 'a', x: 2, y: 0, w: 6, h: 4, 
+                {i: 'a', x: 0, y: 2, w: 4, h: 3, 
                     widget: {
-                        type: 'barchart',
-                        title: 'Widget title',
+                        type: 'curvechart',
+                        title: 'Productions over the day',
                         description: 'Widget description',
                         data: [
                             {x: 10, y:10},
@@ -24,10 +24,10 @@ class Dashboard extends Component {
                         options: {}
                     }
                 },
-                {i: 'b', x: 0, y: 0, w: 2, h: 3, 
+                {i: 'b', x: 0, y: 0, w: 2, h: 2, 
                     widget: {
                         type: 'kpi',
-                        title: 'Widget title',
+                        title: 'Zone 1 production',
                         description: 'Widget description',
                         data: [
                             {value: 90, over: 100, name: 'Production'}
@@ -35,17 +35,43 @@ class Dashboard extends Component {
                         options: {}
                     }
                 },
-                // {i: 'c', x: 4, y: 3, w: 3, h: 2, 
-                //     widget: {
-                //         type: 'kpi',
-                //         title: 'Widget title',
-                //         description: 'Widget description',
-                //         data: [
-                //             {value: 70, over: 100, name: 'Production'}
-                //         ],
-                //         options: {}
-                //     }
-                // },
+                {i: 'c', x: 2, y: 0, w: 2, h: 2, 
+                    widget: {
+                        type: 'kpi',
+                        title: 'Global production rate',
+                        description: 'Widget description',
+                        data: [
+                            {value: 43, over: 100, name: 'Efficiency'}
+                        ],
+                        options: {}
+                    }
+                },
+                {i: 'd', x: 4, y: 0, w: 2, h: 2, 
+                    widget: {
+                        type: 'kpi',
+                        title: 'Machine 442',
+                        description: 'Widget description',
+                        data: [
+                            {value: 122, over: 500, name: 'Speed'}
+                        ],
+                        options: {}
+                    }
+                },
+                {i: 'e', x: 4, y: 3, w: 4, h: 2, 
+                    widget: {
+                        type: 'barchart',
+                        title: 'Production by zone',
+                        description: 'Widget description',
+                        data: [
+                            {x: 10, y:10},
+                            {x: 20, y:40},
+                            {x: 30, y:30},
+                            {x: 40, y:60},
+                            {x: 50, y:40},
+                        ],
+                        options: {}
+                    }
+                },
             ]
         };
     }
@@ -91,7 +117,7 @@ class Dashboard extends Component {
         //  Barchart
         const newValuesBarchart = []; 
         const barsNumber = Math.round(Math.random() * 20);
-        for (let i = 0; i < barsNumber; i++) {
+        for (let i = 0; i < 15; i++) {
             newValuesBarchart.push({x: (10 * (i + 1)), y: Math.round(Math.random() * 100)})
         }
         const newWidgetBarchart = this.state.layout[0].widget;
